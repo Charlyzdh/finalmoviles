@@ -1,79 +1,78 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <ImageView
+        android:id="@+id/profile_image_view"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp" />
 
     <TextView
-        android:id="@+id/title_text_view"
+        android:id="@+id/display_name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_below="@id/profile_image_view"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:text="Product Categories"
-        android:textSize="20sp" />
+        tools:text="John Doe"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title_text_view"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_centerInParent="true"
+        android:layout_marginTop="48dp">
 
         <Button
             android:id="@+id/fruits_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fruits" />
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:drawableTop="@drawable/ic_fruits"
+            android:text="@string/fruits"
+            android:textColor="#000000"
+            android:textSize="16sp"/>
 
         <Button
             android:id="@+id/vegetables_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Vegetables" />
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:drawableTop="@drawable/ic_vegetables"
+            android:text="@string/vegetables"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"/>
 
         <Button
             android:id="@+id/dairy_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Dairy Products" />
-
-        <!-- Add more buttons for other product categories -->
-
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:drawableTop="@drawable/ic_dairy"
+            android:text="@string/dairy"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"/>
     </LinearLayout>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/sign_out_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="148dp"
-        android:layout_marginBottom="289dp"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-
-        <TextView
-            android:id="@+id/email_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/display_name_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:textSize="20sp" />
-
-        <ImageView
-            android:id="@+id/profile_image_view"
-            android:layout_width="50dp"
-            android:layout_height="50dp"/>
-
-        <!-- Add more buttons for other product categories -->
-
-    </LinearLayout>
-
+        android:layout_height="60dp"
+        android:text="@string/sign_out"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:drawableLeft="@drawable/ic_sign_out"
+        android:drawablePadding="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

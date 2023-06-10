@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Proyecto Final Moviles</string>
     <string name="web_client_id">563901771958-npd6s0va0mpkrh9trhk5q59ngdco9252.apps.googleusercontent.com</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="fruits">Frutas</string>
+    <string name="vegetables">Vegetales</string>
+    <string name="dairy">Lacteos</string>
+    <string name="sign_out">Cerrar Sesion</string>
 </resources>
