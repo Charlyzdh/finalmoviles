@@ -15,7 +15,7 @@
         android:layout_marginTop="15dp"
         android:textSize="34sp"
         android:textStyle="bold"
-        android:textColor="#5867E8"
+        android:textColor="#7812A8"
         />
 
     <LinearLayout
@@ -95,7 +95,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/image_shapes"
                 android:paddingLeft="10dp"
-                android:src="@mipmap/ic_fruits_background"
+                android:src="@mipmap/ic_dairy_background"
                 app:srcCompat="@mipmap/ic_dairy_background" />
 
             <Button

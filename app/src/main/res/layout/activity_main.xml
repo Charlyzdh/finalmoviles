@@ -11,12 +11,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/chau_philomene_one"
         android:text="Supermercado \nLITC"
         android:textAlignment="center"
-        android:textColor="#7B61FF"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:textSize="50dp"/>
+        android:textColor="#7812A8"
+        android:textSize="50dp"
+        android:textStyle="normal" />
 
     <ImageView
         android:layout_width="250dp"
