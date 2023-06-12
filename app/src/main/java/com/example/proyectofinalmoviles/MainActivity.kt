@@ -6,7 +6,6 @@ import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -33,8 +32,9 @@ class MainActivity : AppCompatActivity() {
             signIn()
         }
 
-        findViewById<Button>(R.id.sign_out_button).setOnClickListener {
-            signOut()
+        findViewById<Button>(R.id.credits_button).setOnClickListener {
+            val intent = Intent(this, Credits::class.java)
+            startActivity(intent)
         }
     }
 
