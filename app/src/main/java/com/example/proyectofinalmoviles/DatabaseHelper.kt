@@ -18,7 +18,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,"Supermarket.d
                 "idprod INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "product TEXT,"+
                 "description TEXT,"+
-                "price DOUBLE"+
+                "price DOUBLE,"+
+                "image TEXT"+
                 ")"
         db!!.execSQL(fruitsTable)
 
@@ -26,7 +27,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,"Supermarket.d
                 "idprod INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "product TEXT,"+
                 "description TEXT,"+
-                "price DOUBLE"+
+                "price DOUBLE,"+
+                "image TEXT"+
                 ")"
         db!!.execSQL(vegetablesTable)
 
@@ -34,18 +36,19 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,"Supermarket.d
                 "idprod INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "product TEXT,"+
                 "description TEXT,"+
-                "price DOUBLE"+
+                "price DOUBLE,"+
+                "image TEXT"+
                 ")"
         db!!.execSQL(dairy)
 
 
     }//onCreate
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        val sqlfruits = "DROP TABLE IF EXISTS fruitsTable"
+        val sqlfruits = "DROP TABLE IF EXISTS Fruits"
         db!!.execSQL(sqlfruits)
-        val sqlvegetables = "DROP TABLE IF EXISTS vegetablesTable"
+        val sqlvegetables = "DROP TABLE IF EXISTS Vegetables"
         db!!.execSQL(sqlvegetables)
-        val sqldairy = "DROP TABLE IF EXISTS dairy"
+        val sqldairy = "DROP TABLE IF EXISTS Dairy"
         db!!.execSQL(sqldairy)
         onCreate(db)
     }// onUpgrade
@@ -61,15 +64,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,"Supermarket.d
         Log.d("Agregado!","Agregado")
         bd.close()
     }//agregar
-
-    fun mostrar(table: String){
-        val bd = this.readableDatabase
-        val rs = bd.rawQuery("Select * from Fruits",null)
-
-        if(rs.moveToNext()){
-            Log.d("Text","Products: " + rs.getString(1) + "\nDescription: " + rs.getString(2))
-        }
-    }
 
 
 }//class

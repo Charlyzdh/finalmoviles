@@ -14,14 +14,13 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_fruits_background"
+            android:src="@mipmap/ic_vegetables_background"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Frutas"
-            android:layout_marginTop="15dp"
+            android:text="Verduras"
             android:textSize="34sp"
             android:textStyle="bold"
             android:textColor="#7812A8"
@@ -30,7 +29,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerFruits"
+        android:id="@+id/recyclerVegetables"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="450dp"

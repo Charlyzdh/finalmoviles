@@ -8,20 +8,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class FruitsActivity : AppCompatActivity() {
-
-    private val fruitsList = mutableListOf<Fruit>()
-    val adapter = CardAdapter(fruitsList)
+class VegetablesActivity : AppCompatActivity() {
+    private val vegetablesList = mutableListOf<Fruit>()
+    val adapter = CardAdapter(vegetablesList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_fruits)
-
-
+        setContentView(R.layout.activity_vegetables)
 
         // Initialize RecyclerView
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerFruits)
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerVegetables)
 
         // Create and set the adapter
 
@@ -44,23 +41,22 @@ class FruitsActivity : AppCompatActivity() {
         // Example usage
         val databaseHelper = DatabaseHelper(this)
 
-        databaseHelper.agregar("Crema", "Entera", 25.5, "Dairy")
-        databaseHelper.agregar("Leche", "Almendra", 25.5, "Dairy")
-        databaseHelper.agregar("Yogurth", "Griego", 25.5, "Dairy")
+        /*databaseHelper.agregar("Piña", "Lata 1KG Piña en almibar", 25.5, "Fruits")
+        databaseHelper.agregar("Duraznos", "Lata 1KG Durazno en almibar", 25.5, "Fruits")
+        databaseHelper.agregar("Mango", "Lata 1KG Mango en almibar", 25.5, "Fruits")*/
 
 
         val bd = databaseHelper.readableDatabase
-        val rs = bd.rawQuery("Select * from Fruits",null)
+        val rs = bd.rawQuery("Select * from Vegetables",null)
         while(rs.moveToNext()){
-            fruitsList.add(Fruit(rs.getInt(0),rs.getString(1),rs.getString(2), rs.getDouble(3)))
+            vegetablesList.add(Fruit(rs.getInt(0),rs.getString(1),rs.getString(2), rs.getDouble(3)))
         }
 
-        for(item in fruitsList){
+        for(item in vegetablesList){
             Log.d("Products", item.toString())
         }
 
         // Notify the adapter that the data set has changed
         adapter.notifyDataSetChanged()
     }
-
 }

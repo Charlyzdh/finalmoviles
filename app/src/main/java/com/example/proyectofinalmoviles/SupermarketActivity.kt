@@ -43,15 +43,16 @@ class SupermarketActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.fruits_button).setOnClickListener {
             val intent = Intent(this, FruitsActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         findViewById<TextView>(R.id.vegetables_button).setOnClickListener {
-            // Handle vegetables category click
+            val intent = Intent(this, VegetablesActivity::class.java)
+            startActivity(intent)
         }
 
         findViewById<TextView>(R.id.dairy_button).setOnClickListener {
-            // Handle dairy products category click
+            val intent = Intent(this, DairyActivity::class.java)
+            startActivity(intent)
         }
 
         findViewById<TextView>(R.id.credits_button).setOnClickListener {
@@ -77,7 +78,6 @@ class SupermarketActivity : AppCompatActivity() {
     private fun navigateToLogin() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish()
     }
 
 }

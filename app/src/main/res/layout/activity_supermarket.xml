@@ -8,15 +8,23 @@
     android:gravity="center"
     android:background="#ffffff">
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Menú"
-        android:layout_marginTop="15dp"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        android:textColor="#7812A8"
-        />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menú"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            android:textColor="#7812A8"
+            />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,7 +45,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@mipmap/ic_vegetables_background"
+                android:src="@mipmap/ic_fruits_background"
                 android:background="@drawable/image_shapes"
                 android:paddingLeft="10dp"
                 />
@@ -67,7 +75,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/image_shapes"
                 android:paddingLeft="10dp"
-                android:src="@mipmap/ic_fruits_background" />
+                android:src="@mipmap/ic_vegetables_background" />
 
             <Button
                 android:id="@+id/vegetables_button"

@@ -92,6 +92,5 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("displayName", account?.displayName)
         intent.putExtra("photoUrl", account?.photoUrl?.toString())
         startActivity(intent)
-        finish()
     }
 }
