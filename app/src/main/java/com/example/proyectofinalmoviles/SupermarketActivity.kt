@@ -41,7 +41,9 @@ class SupermarketActivity : AppCompatActivity() {
 
         // Handle category buttons clicks
         findViewById<TextView>(R.id.fruits_button).setOnClickListener {
-            // Handle fruits category click
+            val intent = Intent(this, FruitsActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         findViewById<TextView>(R.id.vegetables_button).setOnClickListener {

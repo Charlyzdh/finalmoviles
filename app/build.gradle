@@ -11,6 +11,11 @@ android {
     namespace 'com.example.proyectofinalmoviles'
     compileSdk 33
 
+    buildFeatures{
+        dataBinding = true
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId "com.example.proyectofinalmoviles"
         minSdk 26
