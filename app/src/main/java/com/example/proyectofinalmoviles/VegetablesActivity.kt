@@ -41,10 +41,6 @@ class VegetablesActivity : AppCompatActivity() {
         // Example usage
         val databaseHelper = DatabaseHelper(this)
 
-        /*databaseHelper.agregar("Piña", "Lata 1KG Piña en almibar", 25.5, "Fruits")
-        databaseHelper.agregar("Duraznos", "Lata 1KG Durazno en almibar", 25.5, "Fruits")
-        databaseHelper.agregar("Mango", "Lata 1KG Mango en almibar", 25.5, "Fruits")*/
-
 
         val bd = databaseHelper.readableDatabase
         val rs = bd.rawQuery("Select * from Vegetables",null)

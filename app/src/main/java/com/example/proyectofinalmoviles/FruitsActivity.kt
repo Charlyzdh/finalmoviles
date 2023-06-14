@@ -44,11 +44,6 @@ class FruitsActivity : AppCompatActivity() {
         // Example usage
         val databaseHelper = DatabaseHelper(this)
 
-        databaseHelper.agregar("Crema", "Entera", 25.5, "Dairy")
-        databaseHelper.agregar("Leche", "Almendra", 25.5, "Dairy")
-        databaseHelper.agregar("Yogurth", "Griego", 25.5, "Dairy")
-
-
         val bd = databaseHelper.readableDatabase
         val rs = bd.rawQuery("Select * from Fruits",null)
         while(rs.moveToNext()){

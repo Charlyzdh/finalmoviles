@@ -15,8 +15,8 @@
         android:layout_marginBottom="15dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:src="@mipmap/ic_admin_background"
             app:srcCompat="@mipmap/ic_admin_background" />
 
@@ -31,15 +31,42 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center"
+        android:gravity="center_horizontal">
+
+        <RadioButton
+            android:id="@+id/radioFruits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Frutas" />
+
+        <RadioButton
+            android:id="@+id/radioVegetables"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="Verduras" />
+
+        <RadioButton
+            android:id="@+id/radioDairy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lácteos" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
         android:layout_marginBottom="15dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center_vertical">
@@ -47,70 +74,56 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
                 android:text="Producto:"
                 android:textStyle="bold"
-                android:textSize="25dp"
+                android:textSize="15dp"
+                android:textColor="#7812A8"
                 />
+
+            <EditText
+                android:id="@+id/prodBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:minWidth="220dp"
+                android:textSize="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
                 android:text="Descripción:"
                 android:textStyle="bold"
-                android:textSize="25dp"
+                android:textSize="15dp"
+                android:textColor="#7812A8"
                 />
+
+            <EditText
+                android:id="@+id/descBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:minWidth="220dp"
+                android:textSize="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
                 android:text="Precio:"
                 android:textStyle="bold"
-                android:textSize="25dp"
+                android:textSize="15dp"
+                android:textColor="#7812A8"
                 />
 
-            <TextView
+            <EditText
+                android:id="@+id/priceBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Imagen:"
-                android:textStyle="bold"
-                android:textSize="25dp"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minWidth="190dp"
-                android:textSize="10dp"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minWidth="190dp"
-                android:textSize="10dp"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minWidth="190dp"
-                android:textSize="10dp"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minWidth="190dp"
-                android:textSize="10dp"
-                />
+                android:layout_marginLeft="100dp"
+                android:minWidth="220dp"
+                android:textSize="10dp" />
 
         </LinearLayout>
 
@@ -120,38 +133,37 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerProds"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="150dp"
-        android:layout_marginBottom="15dp"/>
+        android:layout_height="200dp"
+        android:layout_marginBottom="15dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:minHeight="50dp"
+        android:orientation="horizontal">
 
         <Button
+            android:id="@+id/addButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Agregar"
-            />
+            android:text="Agregar" />
 
         <Button
+            android:id="@+id/editButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Editar"
-            />
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="Editar" />
 
         <Button
+            android:id="@+id/deleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#ff0f0f"
-            android:text="Eliminar"
-            />
+            android:text="Eliminar" />
 
     </LinearLayout>
-
-
-
 
 </LinearLayout>

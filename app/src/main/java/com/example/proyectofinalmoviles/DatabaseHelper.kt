@@ -18,8 +18,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,"Supermarket.d
                 "idprod INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "product TEXT,"+
                 "description TEXT,"+
-                "price DOUBLE,"+
-                "image TEXT"+
+                "price DOUBLE"+
                 ")"
         db!!.execSQL(fruitsTable)
 
@@ -27,8 +26,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,"Supermarket.d
                 "idprod INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "product TEXT,"+
                 "description TEXT,"+
-                "price DOUBLE,"+
-                "image TEXT"+
+                "price DOUBLE"+
                 ")"
         db!!.execSQL(vegetablesTable)
 
@@ -36,8 +34,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,"Supermarket.d
                 "idprod INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "product TEXT,"+
                 "description TEXT,"+
-                "price DOUBLE,"+
-                "image TEXT"+
+                "price DOUBLE"+
                 ")"
         db!!.execSQL(dairy)
 
@@ -61,7 +58,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,"Supermarket.d
         datos.put("price", price)
         val bd = this.writableDatabase
         bd.insert(table, null, datos)
-        Log.d("Agregado!","Agregado")
         bd.close()
     }//agregar
 
