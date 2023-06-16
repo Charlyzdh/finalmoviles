@@ -23,6 +23,7 @@ class AdminActivity : AppCompatActivity(), CardAdapter.OnItemClickListener {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin)
+        val idBox = findViewById<EditText>(R.id.idBox)
         val prodBox = findViewById<EditText>(R.id.prodBox)
         val descBox = findViewById<EditText>(R.id.descBox)
         val priceBox = findViewById<EditText>(R.id.priceBox)
@@ -43,20 +44,73 @@ class AdminActivity : AppCompatActivity(), CardAdapter.OnItemClickListener {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         radioFruits.setOnClickListener{
-            // Populate the fruitsList with your data
+            idBox.setText("")
+            prodBox.setText("")
+            descBox.setText("")
+            priceBox.setText("")
             populateFruitsList("Fruits")
         }
 
         radioVegetables.setOnClickListener{
+            idBox.setText("")
+            prodBox.setText("")
+            descBox.setText("")
+            priceBox.setText("")
             populateFruitsList("Vegetables")
         }
 
         radioDairy.setOnClickListener{
+            idBox.setText("")
+            prodBox.setText("")
+            descBox.setText("")
+            priceBox.setText("")
             populateFruitsList("Dairy")
         }
 
+        findViewById<Button>(R.id.deleteButton).setOnClickListener{
+            if(idBox.text.isNotBlank() && prodBox.text.isNotBlank() && descBox.text.isNotBlank() && priceBox.text.isNotBlank()){
+                var table = "";
+                if(radioVegetables.isChecked){
+                    table = "Vegetables"
+                }else if(radioFruits.isChecked){
+                    table = "Fruits"
+                }else if(radioDairy.isChecked){
+                    table = "Dairy"
+                }
+
+                databaseHelper.eliminar(idBox.text.toString(),table)
+                populateFruitsList(table)
+
+            }else{
+                Toast.makeText(this,"Debe seleccionar al menos un producto!",Toast.LENGTH_SHORT).show()
+            }
+            idBox.setText("")
+            prodBox.setText("")
+            descBox.setText("")
+            priceBox.setText("")
+        }
+
         findViewById<Button>(R.id.editButton).setOnClickListener{
-            Log.d("Products: ",adapter.itemCount.toString())
+            if(idBox.text.isNotBlank() && prodBox.text.isNotBlank() && descBox.text.isNotBlank() && priceBox.text.isNotBlank()){
+                var table = "";
+                if(radioVegetables.isChecked){
+                    table = "Vegetables"
+                }else if(radioFruits.isChecked){
+                    table = "Fruits"
+                }else if(radioDairy.isChecked){
+                    table = "Dairy"
+                }
+
+                databaseHelper.actualizar(idBox.text.toString(),prodBox.text.toString(), descBox.text.toString(), priceBox.text.toString().toDouble(),table)
+                populateFruitsList(table)
+
+            }else{
+                Toast.makeText(this,"Todos los campos deben contener información!",Toast.LENGTH_SHORT).show()
+            }
+            idBox.setText("")
+            prodBox.setText("")
+            descBox.setText("")
+            priceBox.setText("")
         }
 
         findViewById<Button>(R.id.addButton).setOnClickListener{
@@ -78,6 +132,10 @@ class AdminActivity : AppCompatActivity(), CardAdapter.OnItemClickListener {
                 Toast.makeText(this,"Todos los campos deben contener información!",Toast.LENGTH_SHORT).show()
             }
         }
+        idBox.setText("")
+        prodBox.setText("")
+        descBox.setText("")
+        priceBox.setText("")
 
     }
 
@@ -86,8 +144,10 @@ class AdminActivity : AppCompatActivity(), CardAdapter.OnItemClickListener {
 
         items[position] = fruitsList[position].toString()
         items[position].substring(items[position].indexOf("=") + 1, items[position].indexOf(","))*/
+        findViewById<EditText>(R.id.idBox).setText("" + fruitsList[position].idprod)
         findViewById<EditText>(R.id.prodBox).setText("" + fruitsList[position].prod)
-        Toast.makeText(this,"Clicked: " + fruitsList[position].prod,Toast.LENGTH_SHORT).show()
+        findViewById<EditText>(R.id.descBox).setText("" + fruitsList[position].description)
+        findViewById<EditText>(R.id.priceBox).setText("" + fruitsList[position].price)
     }
 
     fun populateFruitsList(table: String){

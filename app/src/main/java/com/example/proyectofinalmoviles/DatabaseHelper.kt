@@ -61,5 +61,20 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,"Supermarket.d
         bd.close()
     }//agregar
 
+    fun actualizar(idprod: String, prod: String, description: String, price: Double, table: String) {
+        val db = this.writableDatabase
+        val datos = ContentValues()
+        datos.put("product", prod)
+        datos.put("description", description)
+        datos.put("price", price)
+        db.update(table, datos, "idprod=?", arrayOf(idprod));
+        db.close()
+    }//actualizar
+
+    fun eliminar(idprod: String, table: String) {
+        val db = this.writableDatabase
+        db.delete(table,"idprod=?", arrayOf(idprod));
+        db.close()
+    }//eliminar
 
 }//class
