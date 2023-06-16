@@ -46,11 +46,11 @@ class MainActivity : AppCompatActivity() {
     private fun signOut() {
         googleSignInClient.signOut()
             .addOnCompleteListener(this) {
-                Toast.makeText(this, "Signed out", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Sesión cerrada!", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener(this) { e ->
                 Log.e("LoginActivity", "Sign out failed", e)
-                Toast.makeText(this, "Sign out failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Falló el cierre de sesión", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -68,12 +68,14 @@ class MainActivity : AppCompatActivity() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
 
-            // Signed in successfully, show authenticated UI.
-            Toast.makeText(this, "Sign-in successful", Toast.LENGTH_SHORT).show()
             // You can now use the account object to access user details
             val email = account?.email
             val displayName = account?.displayName
             val photoUrl = account?.photoUrl
+
+            // Signed in successfully, show authenticated UI.
+            Toast.makeText(this, "Bienvenid@ " + displayName, Toast.LENGTH_SHORT).show()
+
 
             showSupermarketApp(account)
 

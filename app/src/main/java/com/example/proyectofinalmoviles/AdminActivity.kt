@@ -10,12 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class AdminActivity : AppCompatActivity() {
+class AdminActivity : AppCompatActivity(), CardAdapter.OnItemClickListener {
     private val fruitsList = mutableListOf<Fruit>()
     val adapter = CardAdapter(fruitsList)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        adapter.setOnItemClickListener(this)
 
         val databaseHelper = DatabaseHelper(this)
 
@@ -27,6 +29,8 @@ class AdminActivity : AppCompatActivity() {
         val radioDairy = findViewById<RadioButton>(R.id.radioDairy)
         val radioVegetables = findViewById<RadioButton>(R.id.radioVegetables)
         val radioFruits = findViewById<RadioButton>(R.id.radioFruits)
+
+
 
         // Initialize RecyclerView
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerProds)
@@ -51,6 +55,10 @@ class AdminActivity : AppCompatActivity() {
             populateFruitsList("Dairy")
         }
 
+        findViewById<Button>(R.id.editButton).setOnClickListener{
+            Log.d("Products: ",adapter.itemCount.toString())
+        }
+
         findViewById<Button>(R.id.addButton).setOnClickListener{
 
             if(prodBox.text.isNotBlank() && descBox.text.isNotBlank() && priceBox.text.isNotBlank()){
@@ -65,12 +73,21 @@ class AdminActivity : AppCompatActivity() {
 
                 databaseHelper.agregar(prodBox.text.toString(), descBox.text.toString(), priceBox.text.toString().toDouble(),table)
                 populateFruitsList(table)
+
             }else{
                 Toast.makeText(this,"Todos los campos deben contener información!",Toast.LENGTH_SHORT).show()
             }
-
         }
 
+    }
+
+    override fun onItemClick(position: Int) {
+        /*val items = arrayOf<String>("")
+
+        items[position] = fruitsList[position].toString()
+        items[position].substring(items[position].indexOf("=") + 1, items[position].indexOf(","))*/
+        findViewById<EditText>(R.id.prodBox).setText("" + fruitsList[position].prod)
+        Toast.makeText(this,"Clicked: " + fruitsList[position].prod,Toast.LENGTH_SHORT).show()
     }
 
     fun populateFruitsList(table: String){
