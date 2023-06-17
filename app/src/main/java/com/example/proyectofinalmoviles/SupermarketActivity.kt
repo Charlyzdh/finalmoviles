@@ -19,27 +19,31 @@ class SupermarketActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_supermarket)
 
-        // Configure Google Sign-In
+        //Configuramos el constructor de API de google
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
 
-        // Retrieve user details from intent and display in UI
+        // Obtenemos la informacion pasada como parametro sobre la cuenta loggeada
         val email = intent.getStringExtra("email")
         val displayName = intent.getStringExtra("displayName")
         val photoUrl = intent.getStringExtra("photoUrl")
 
 
+        //Utilizamos solo el nombre de la cuenta para mostrarlo en un TextView
         findViewById<TextView>(R.id.display_name_text_view).text = displayName
 
+        //Utilizamos Glide para mostrar la fotografía de perfil de la cuenta loggeada
         Glide.with(this)
             .load(photoUrl)
             .circleCrop()
             .into(findViewById<ImageView>(R.id.profile_image_view))
 
-        // Handle category buttons clicks
+
+        // Asignamos los listeners de clicks a los botones de las categorias como Frutas, Verduras y Lácteos
+
         findViewById<TextView>(R.id.fruits_button).setOnClickListener {
             val intent = Intent(this, FruitsActivity::class.java)
             startActivity(intent)
@@ -60,21 +64,22 @@ class SupermarketActivity : AppCompatActivity() {
             signOut()
         }
 
-
-        // Add click listeners for other buttons as needed
     }
 
 
+    //En este intent utilizaremos la funcion de sign out para poder cerrar la sesion de la cuenta loggeada
     private fun signOut() {
         googleSignInClient.signOut()
             .addOnCompleteListener(this) {
-                navigateToLogin()
+                navigateToLogin() //Con el CompleteListener podemos detectar si la sesion se cerrí correctamente, con esto mandamos llamar la funcion de regreso al login
             }
             .addOnFailureListener(this) { e ->
-                // Handle sign out failure
+                //En caso de tener algun error de cierre, lo podemos mostrar aqui ya sea por Toast o en consola
             }
     }
 
+
+    //Funcion para regresar al login, el cual es la MainActivity
     private fun navigateToLogin() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
