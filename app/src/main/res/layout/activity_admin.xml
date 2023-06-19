@@ -71,23 +71,36 @@
             android:orientation="vertical"
             android:gravity="center_vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
-                android:text="ID:"
-                android:textStyle="bold"
-                android:textSize="15dp"
-                android:textColor="#7812A8"
-                />
+                android:layout_height="30dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_marginLeft="100dp">
 
-            <EditText
-                android:id="@+id/idBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
-                android:minWidth="220dp"
-                android:textSize="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ID:"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:textColor="#7812A8"
+                    />
+
+                <TextView
+                    android:id="@+id/idBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="..."
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:textColor="#7812A8"
+                    />
+
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -140,6 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="100dp"
+                android:inputType="number|numberDecimal"
                 android:minWidth="220dp"
                 android:textSize="10dp" />
 

@@ -5,11 +5,12 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.isDigitsOnly
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 class AdminActivity : AppCompatActivity(), CardAdapter.OnItemClickListener {
 
     //Creamos una lista mutable, basado en la clase de ayuda para la creacion de registros
@@ -31,7 +32,7 @@ class AdminActivity : AppCompatActivity(), CardAdapter.OnItemClickListener {
         setContentView(R.layout.activity_admin)
 
         //Declaramos variables para cada elemento de texto y botones tipo radio
-        val idBox = findViewById<EditText>(R.id.idBox)
+        val idBox = findViewById<TextView>(R.id.idBox)
         val prodBox = findViewById<EditText>(R.id.prodBox)
         val descBox = findViewById<EditText>(R.id.descBox)
         val priceBox = findViewById<EditText>(R.id.priceBox)
@@ -89,30 +90,36 @@ class AdminActivity : AppCompatActivity(), CardAdapter.OnItemClickListener {
         //Asignamos un listener para eliminar registros de la base de datos
         findViewById<Button>(R.id.deleteButton).setOnClickListener{
 
-            //Validamos que las cajas de texto no estén vacias para proceder con la eliminacion
-            if(idBox.text.isNotBlank() && prodBox.text.isNotBlank() && descBox.text.isNotBlank() && priceBox.text.isNotBlank()){
-                var table = "";
+            //Validamos si existe alguna categoria seleccionada para poder realizar las operaciones CRUD
+            if(radioDairy.isChecked || radioFruits.isChecked || radioVegetables.isChecked){
+                //Validamos que las cajas de texto no estén vacias para proceder con la eliminacion
+                if(idBox.text.isNotBlank() && prodBox.text.isNotBlank() && descBox.text.isNotBlank() && priceBox.text.isNotBlank()){
+                    var table = "";
 
-                //Validamos cual de las tablas se van a manipular
-                if(radioVegetables.isChecked){
-                    table = "Vegetables"
-                }else if(radioFruits.isChecked){
-                    table = "Fruits"
-                }else if(radioDairy.isChecked){
-                    table = "Dairy"
+                    //Validamos cual de las tablas se van a manipular
+                    if(radioVegetables.isChecked){
+                        table = "Vegetables"
+                    }else if(radioFruits.isChecked){
+                        table = "Fruits"
+                    }else if(radioDairy.isChecked){
+                        table = "Dairy"
+                    }
+
+                    //Utilizamos la funcion eliminar dentro de la clase helper de la base de datos
+                    databaseHelper.eliminar(idBox.text.toString(),table)
+
+                    //Populamos la lista de productos de la tabla seleccionada por los radioButtons
+                    populateFruitsList(table)
+
+                }else{
+
+                    //En caso de que no se cumplan los requisitos de informacion, mostramos un Toast con el error
+                    Toast.makeText(this,"Debe seleccionar al menos un producto!",Toast.LENGTH_SHORT).show()
                 }
-
-                //Utilizamos la funcion eliminar dentro de la clase helper de la base de datos
-                databaseHelper.eliminar(idBox.text.toString(),table)
-
-                //Populamos la lista de productos de la tabla seleccionada por los radioButtons
-                populateFruitsList(table)
-
             }else{
-
-                //En caso de que no se cumplan los requisitos de informacion, mostramos un Toast con el error
-                Toast.makeText(this,"Debe seleccionar al menos un producto!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Debes seleccionar al menos una categoria de productos!",Toast.LENGTH_SHORT).show()
             }
+
 
             //Para evitar errores o manipulaciones involuntarias, eliminamos los valores dentro de los EditText
             idBox.setText("")
@@ -123,28 +130,34 @@ class AdminActivity : AppCompatActivity(), CardAdapter.OnItemClickListener {
 
 
         findViewById<Button>(R.id.editButton).setOnClickListener{
-            //Validamos que las cajas de texto no estén vacias para proceder con la edicion
-            if(idBox.text.isNotBlank() && prodBox.text.isNotBlank() && descBox.text.isNotBlank() && priceBox.text.isNotBlank()){
 
-                //Validamos cual de las tablas se van a manipular
-                var table = "";
-                if(radioVegetables.isChecked){
-                    table = "Vegetables"
-                }else if(radioFruits.isChecked){
-                    table = "Fruits"
-                }else if(radioDairy.isChecked){
-                    table = "Dairy"
+            //Validamos si existe alguna categoria seleccionada para poder realizar las operaciones CRUD
+            if(radioDairy.isChecked || radioFruits.isChecked || radioVegetables.isChecked){
+                //Validamos que las cajas de texto no estén vacias para proceder con la edicion
+                if(idBox.text.isNotBlank() && prodBox.text.isNotBlank() && descBox.text.isNotBlank() && priceBox.text.isNotBlank()){
+
+                    //Validamos cual de las tablas se van a manipular
+                    var table = "";
+                    if(radioVegetables.isChecked){
+                        table = "Vegetables"
+                    }else if(radioFruits.isChecked){
+                        table = "Fruits"
+                    }else if(radioDairy.isChecked){
+                        table = "Dairy"
+                    }
+
+                    //Utilizamos la funcion actualizar dentro de la clase helper de la base de datos con el paso de parametros sobre todos los datos de la tabla de la bd
+                    databaseHelper.actualizar(idBox.text.toString(),prodBox.text.toString(), descBox.text.toString(), priceBox.text.toString().toDouble(),table)
+
+                    //Populamos la lista de productos de la tabla seleccionada por los radioButtons
+                    populateFruitsList(table)
+
+                }else{
+                    //En caso de que no se cumplan los requisitos de informacion, mostramos un Toast con el error
+                    Toast.makeText(this,"Todos los campos deben contener información!",Toast.LENGTH_SHORT).show()
                 }
-
-                //Utilizamos la funcion actualizar dentro de la clase helper de la base de datos con el paso de parametros sobre todos los datos de la tabla de la bd
-                databaseHelper.actualizar(idBox.text.toString(),prodBox.text.toString(), descBox.text.toString(), priceBox.text.toString().toDouble(),table)
-
-                //Populamos la lista de productos de la tabla seleccionada por los radioButtons
-                populateFruitsList(table)
-
             }else{
-                //En caso de que no se cumplan los requisitos de informacion, mostramos un Toast con el error
-                Toast.makeText(this,"Todos los campos deben contener información!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Debes seleccionar al menos una categoria de productos!",Toast.LENGTH_SHORT).show()
             }
 
             //Para evitar errores o manipulaciones involuntarias, eliminamos los valores dentro de los EditText
@@ -156,28 +169,33 @@ class AdminActivity : AppCompatActivity(), CardAdapter.OnItemClickListener {
 
         findViewById<Button>(R.id.addButton).setOnClickListener{
 
-            //Validamos que las cajas de texto no estén vacias para proceder con la edicion
-            if(prodBox.text.isNotBlank() && descBox.text.isNotBlank() && priceBox.text.isNotBlank()){
-                var table = "";
+            //Validamos si existe alguna categoria seleccionada para poder realizar las operaciones CRUD
+            if(radioDairy.isChecked || radioFruits.isChecked || radioVegetables.isChecked){
+                //Validamos que las cajas de texto no estén vacias para proceder con la edicion
+                if(prodBox.text.isNotBlank() && descBox.text.isNotBlank() && priceBox.text.isNotBlank()){
+                    var table = "";
 
-                //Validamos cual de las tablas se van a manipular
-                if(radioVegetables.isChecked){
-                    table = "Vegetables"
-                }else if(radioFruits.isChecked){
-                    table = "Fruits"
-                }else if(radioDairy.isChecked){
-                    table = "Dairy"
+                    //Validamos cual de las tablas se van a manipular
+                    if(radioVegetables.isChecked){
+                        table = "Vegetables"
+                    }else if(radioFruits.isChecked){
+                        table = "Fruits"
+                    }else if(radioDairy.isChecked){
+                        table = "Dairy"
+                    }
+
+                    //Utilizamos la funcion agregar dentro de la clase helper de la base de datos con el paso de parametros sobre todos los datos de la tabla de la bd
+                    databaseHelper.agregar(prodBox.text.toString(), descBox.text.toString(), priceBox.text.toString().toDouble(),table)
+
+                    //Populamos la lista de productos de la tabla seleccionada por los radioButtons
+                    populateFruitsList(table)
+
+                }else{
+                    //En caso de que no se cumplan los requisitos de informacion, mostramos un Toast con el error
+                    Toast.makeText(this,"Todos los campos deben contener información!",Toast.LENGTH_SHORT).show()
                 }
-
-                //Utilizamos la funcion agregar dentro de la clase helper de la base de datos con el paso de parametros sobre todos los datos de la tabla de la bd
-                databaseHelper.agregar(prodBox.text.toString(), descBox.text.toString(), priceBox.text.toString().toDouble(),table)
-
-                //Populamos la lista de productos de la tabla seleccionada por los radioButtons
-                populateFruitsList(table)
-
             }else{
-                //En caso de que no se cumplan los requisitos de informacion, mostramos un Toast con el error
-                Toast.makeText(this,"Todos los campos deben contener información!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Debes seleccionar al menos una categoria de productos!",Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -189,10 +207,12 @@ class AdminActivity : AppCompatActivity(), CardAdapter.OnItemClickListener {
 
     }
 
+
+
     override fun onItemClick(position: Int) {
 
         //Evento para llenar los campos de los EditText al hacer click sobre las tarjetas de productos
-        findViewById<EditText>(R.id.idBox).setText("" + fruitsList[position].idprod)
+        findViewById<TextView>(R.id.idBox).setText("" + fruitsList[position].idprod)
         findViewById<EditText>(R.id.prodBox).setText("" + fruitsList[position].prod)
         findViewById<EditText>(R.id.descBox).setText("" + fruitsList[position].description)
         findViewById<EditText>(R.id.priceBox).setText("" + fruitsList[position].price)
@@ -227,3 +247,4 @@ class AdminActivity : AppCompatActivity(), CardAdapter.OnItemClickListener {
     }
 
 }
+

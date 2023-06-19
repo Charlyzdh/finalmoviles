@@ -1,23 +1,14 @@
 package com.example.proyectofinalmoviles
 
-import android.content.Context
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 
 class CardAdapter(private val items: List<Fruit>) :
     RecyclerView.Adapter<CardAdapter.CardViewHolder>(){
-
     private var onItemClickListener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
@@ -44,7 +35,7 @@ class CardAdapter(private val items: List<Fruit>) :
 
         holder.prodTextView.text = currentItem.prod.toString()
         holder.prodDescTextView.text = currentItem.description.toString()
-        holder.prodPriceTextView.text = currentItem.price.toString()
+        holder.prodPriceTextView.text = "$ " + currentItem.price.toString()
         holder.imgImageView.setOnClickListener{
             onItemClick(position)
         }
